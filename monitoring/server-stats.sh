@@ -1,82 +1,57 @@
-# get total CPU usage
-function get_cpu_usage() {
-    echo "===== Total CPU Usage ====="
-    idle=$(mpstat 1 1 | awk '/Average/ {print 100 - $12}')
-    echo "CPU Usage: ${idle}%"
-    echo ""
+#!/bin/bash
+
+# Function to display CPU usage
+function cpu_usage() {
+    echo "### CPU Usage ###"
+    # Display total CPU usage
+    top -bn1 | grep "Cpu(s)" | awk '{print "CPU Usage: " $2 + $4 "%"}'
+    echo
 }
 
-# get total memory usage
-function get_memory_usage() {
-    echo "===== Total Memory Usage ====="
-    mem_info=$(free -m | awk 'NR==2{printf "Total: %s MB, Used: %s MB, Free: %s MB (%.2f%% used)\n", $2, $3, $4, $3*100/$2}')
-    echo "$mem_info"
-    echo ""
+# Function to display memory usage
+function memory_usage() {
+    echo "### Memory Usage ###"
+    # Display total, used, and free memory
+    free -m | awk 'NR==2{printf "Memory Usage: %sMB / %sMB (%.2f%%)\n", $3,$2,$3*100/$2 }'
+    echo
 }
 
-# get total disk usage
-function get_disk_usage() {
-    echo "===== Total Disk Usage ====="
-    disk_info=$(df -h / | awk 'NR==2{printf "Used: %s, Available: %s, Usage: %s\n", $3, $4, $5}')
-    echo "$disk_info"
-    echo ""
+# Function to display disk usage
+function disk_usage() {
+    echo "### Disk Usage ###"
+    # Display disk usage percentage for the root filesystem
+    df -h | awk '$NF=="/"{printf "Disk Usage: %d/%dGB (%s)\n", $3,$2,$5}'
+    echo
 }
 
-# get OS version
-function get_os_version() {
-    echo "===== OS Version ====="
-    os_version=$(lsb_release -d | awk -F"\t" '{print $2}')
-    echo "OS Version: $os_version"
-    echo ""
+# Function to display top 5 processes by CPU usage
+function top_cpu_processes() {
+    echo "### Top 5 CPU consuming processes ###"
+    ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 6
+    echo
 }
 
-# get uptime
-function get_uptime() {
-    echo "===== Uptime ====="
-    uptime_info=$(uptime -p)
-    echo "Uptime: $uptime_info"
-    echo ""
+# Function to display top 5 processes by memory usage
+function top_memory_processes() {
+    echo "### Top 5 Memory consuming processes ###"
+    ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head -n 6
+    echo
 }
 
-# get load average
-function get_load_average() {
-    echo "===== Load Average ====="
-    load_avg=$(uptime | awk -F'load average:' '{print $2}' | sed 's/^ *//')
-    echo "Load Average: $load_avg"
-    echo ""
+# Stretch goal: Additional stats
+function additional_stats() {
+    echo "### Additional Stats ###"
+    echo "OS Version: $(uname -o)"
+    echo "Uptime: $(uptime -p)"
+    echo "Load Average: $(uptime | awk -F'load average:' '{ print $2 }')"
+    echo "Logged in users: $(who | wc -l)"
+    echo "Failed login attempts: $(grep 'Failed password' /var/log/auth.log | wc -l)"
+    echo
 }
 
-# get logged in users
-function get_logged_in_users() {
-    echo "===== Logged In Users ====="
-    logged_in=$(who | wc -l)
-    echo "Number of Logged In Users: $logged_in"
-    echo ""
-}
-
-# get top 5 processes by CPU usage
-function get_top_cpu_processes() {
-    echo "===== Top 5 Processes by CPU Usage ====="
-    top_cpu=$(ps -eo pid,comm,%cpu --sort=-%cpu | head -n 6)
-    echo "$top_cpu"
-    echo ""
-}
-
-# get top 5 processes by memory usage
-function get_top_memory_processes() {
-    echo "===== Top 5 Processes by Memory Usage ====="
-    top_mem=$(ps -eo pid,comm,%mem --sort=-%mem | head -n 6)
-    echo "$top_mem"
-    echo ""
-}
-
-
-get_cpu_usage
-get_memory_usage
-get_disk_usage
-get_os_version
-get_uptime
-get_load_average
-get_logged_in_users
-get_top_cpu_processes
-get_top_memory_processes
+# Call the functions
+cpu_usage
+memory_usage
+disk_usage
+top_cpu_processes
+top_memory_processes
