@@ -4,7 +4,11 @@ This script collects key server performance metrics such as:
 - CPU Usage (%)
 - Memory Usage (used vs free)
 - Disk Usage
+- OS Version
+- Uptime
 - Load Average
+- Logged in Users
+- Top CPU & Memory processes
 - Network Statistics
 
 ## Usage
