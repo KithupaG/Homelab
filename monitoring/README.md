@@ -16,3 +16,8 @@ This script collects key server performance metrics such as:
 clone repo using git clone
 chmod +x server_metrics.sh
 ./server_metrics.sh
+```
+
+##Notes
+
+Tested on Ubuntu 22.04
