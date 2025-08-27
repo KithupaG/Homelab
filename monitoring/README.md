@@ -23,3 +23,10 @@ This script collects key server performance metrics such as:
 ##Notes
 
 Tested on Ubuntu 22.04
+
+##Output
+
+
+<img width="533" height="445" alt="image" src="https://github.com/user-attachments/assets/fef86ad8-6869-4c35-8fa1-c026b83c0896" />
+
+
