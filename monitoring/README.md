@@ -13,9 +13,11 @@ This script collects key server performance metrics such as:
 
 ## Usage
 ```bash
-clone repo using git clone
-chmod +x server_metrics.sh
-./server_metrics.sh
+1. clone repo using git clone
+
+2. chmod +x server_metrics.sh
+
+3. ./server_metrics.sh
 ```
 
 ##Notes
