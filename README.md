@@ -1,4 +1,4 @@
-# Homelab Projects
+# Homelab
 
 This repository documents my homelab journey — covering AWS, Terraform, Kubernetes, CI/CD, monitoring, and security experiments.  
 
