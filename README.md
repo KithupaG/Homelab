@@ -19,6 +19,6 @@ This repository documents my homelab journey — covering AWS, Terraform, Kubern
 -->
 
 ## 🏆 Goals
-- Gain hands-on AWS & DevOps experience  
+- Gain hands-on Kubernetes + RHEL experience  
 - Document solutions for future reference  
 
