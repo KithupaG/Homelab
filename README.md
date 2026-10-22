@@ -10,14 +10,6 @@ This repository documents my homelab journey — covering AWS, Terraform, Kubern
 - Prometheus + Grafana
 - Red Hat Linux (RHEL Servers)
 
-<!-- ## 📂 Contents
-- /terraform-labs → Infrastructure-as-code experiments
-- /aws-labs → AWS CLI, IAM, Lambda examples
-- /k8s-labs → Cluster deployments and configs
-- /docs → Writeups in Markdown
-
--->
-
 ## 🏆 Goals
 - Gain hands-on Kubernetes + RHEL experience  
 - Document solutions for future reference  
